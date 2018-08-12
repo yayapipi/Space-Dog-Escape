@@ -5,55 +5,62 @@ using UnityEngine;
 
 
 public class CharacterBehavior : MonoBehaviour {
-    public GameObject level;
-    public GameObject spawnPoint;
+
+    //Public Variable
+    public float speed = 40f;
+    public float player_life = 200f;
+
+    //Private Variable 
+    private CharacterController2D controller;
     private Animator anim;
     Vector2 force;
+    private float player_move;
+    private bool isJump;
+
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
+        controller = GetComponent<CharacterController2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime*5f, 0, 0);
+
+        player_move = Input.GetAxisRaw("Horizontal")*speed;
+
+        anim.SetFloat("speed", Mathf.Abs(player_move));
+
+
         if (Input.GetButtonDown("Jump"))
         {
+            isJump = true;
             anim.SetBool("isJump", true);
-            Vector2 a = new Vector2(0, 350);
-            GetComponent<Rigidbody2D>().AddForce(a);
-            GetComponent<SpriteRenderer>().flipX = false;
         }
-        if (Input.GetAxis("Horizontal")<0)
-        {
-            anim.SetBool("isRun", true);
-            GetComponent<SpriteRenderer>().flipX = true;
-            
-        }
-        else if (Input.GetAxis("Horizontal") > 0)
-        {
-            anim.SetBool("isRun", true);
-            GetComponent<SpriteRenderer>().flipX = false;
-        }
-        else
-        {
-            anim.SetBool("isRun", false);
-            anim.SetBool("isJump", false);
-        }
+        
 	}
+
+    public void onLanding()
+    {
+        StartCoroutine(landfalse());
+        Debug.Log("Ground");
+    }
+
+    IEnumerator landfalse()
+    {
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("isJump", false);
+    }
+
+    private void FixedUpdate()
+    {
+        controller.Move(player_move*Time.fixedDeltaTime, false, isJump);
+        isJump = false;
+
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "RedTrigger")
-        {
-            Debug.Log("Crush");
-        //    Instantiate(level, spawnPoint.transform.position, Quaternion.identity);
-            collision.transform.parent.gameObject.GetComponent<Animator>().SetBool("isDestroy", true);
-            Destroy(collision.transform.parent.gameObject,0.3f);
-            Destroy(collision.gameObject);
-            Invoke("LevelSpawn", 0.3f);
 
-        }
         if (collision.gameObject.tag == "Reset")
         {
             Debug.Log("Reset");
@@ -63,10 +70,7 @@ public class CharacterBehavior : MonoBehaviour {
 
     }
 
-    private void LevelSpawn()
-    {
-        Instantiate(level, spawnPoint.transform.position, Quaternion.identity);
-    }
+
 
    
 }
