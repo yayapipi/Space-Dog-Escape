@@ -54,6 +54,12 @@ public class CharacterBehavior : MonoBehaviour {
             Invoke("LevelSpawn", 0.3f);
 
         }
+        if (collision.gameObject.tag == "Reset")
+        {
+            Debug.Log("Reset");
+            transform.position = new Vector3(0.22f, -0.4f, 0);
+
+        }
 
     }
 
@@ -62,5 +68,5 @@ public class CharacterBehavior : MonoBehaviour {
         Instantiate(level, spawnPoint.transform.position, Quaternion.identity);
     }
 
- 
+   
 }
