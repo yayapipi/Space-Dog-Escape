@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public class CharacterBehavior : MonoBehaviour {
+    public GameObject level;
+    public GameObject spawnPoint;
     private Animator anim;
     Vector2 force;
     // Use this for initialization
@@ -46,9 +47,19 @@ public class CharacterBehavior : MonoBehaviour {
         if (collision.gameObject.tag == "RedTrigger")
         {
             Debug.Log("Crush");
-            Destroy(collision.transform.parent.gameObject);
+        //    Instantiate(level, spawnPoint.transform.position, Quaternion.identity);
+            collision.transform.parent.gameObject.GetComponent<Animator>().SetBool("isDestroy", true);
+            Destroy(collision.transform.parent.gameObject,0.3f);
+            Destroy(collision.gameObject);
+            Invoke("LevelSpawn", 0.3f);
+
         }
 
+    }
+
+    private void LevelSpawn()
+    {
+        Instantiate(level, spawnPoint.transform.position, Quaternion.identity);
     }
 
  
