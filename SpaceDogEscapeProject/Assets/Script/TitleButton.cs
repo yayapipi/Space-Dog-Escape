@@ -19,4 +19,14 @@ public class TitleButton : MonoBehaviour {
         GetComponent<AudioSource>().Play();
         SceneManager.LoadScene("GamePlay");
     }
+    public void MainMenu()
+    {
+        GetComponent<AudioSource>().Play();
+        SceneManager.LoadScene("Title");
+    }
+    public void Learderboard()
+    {
+        GetComponent<AudioSource>().Play();
+        SceneManager.LoadScene("LearderBoard");
+    }
 }

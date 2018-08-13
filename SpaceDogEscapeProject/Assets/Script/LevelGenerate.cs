@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,10 +43,11 @@ public class LevelGenerate : MonoBehaviour {
 
     private void LevelSpawn()
     {
-        Instantiate(level[Random.Range(0,level.Length)], spawnPoint.transform.position, spawnPoint.transform.rotation);
+        GameObject levels = Instantiate(level[UnityEngine.Random.Range(0,level.Length)], spawnPoint.transform.position, spawnPoint.transform.rotation);
+        levels.GetComponent<LevelMovement>().speed += level_speed;
         GameObject.FindGameObjectWithTag("Monster").GetComponent<SpriteRenderer>().color = Color.white;
+        GameObject.FindGameObjectWithTag("Monster").GetComponent<MonsterBehavior>().speed += level_speed;
     }
 
-  
-
+    
 }

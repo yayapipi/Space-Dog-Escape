@@ -5,6 +5,7 @@ using UnityEngine;
 public class MonsterBehavior : MonoBehaviour {
     private CharacterController2D controller;
     public int speed;
+    public GameObject lose_prefab;
     private Vector2 player_position;
     float move_direction = 0f;
     float movement;
@@ -63,7 +64,11 @@ public class MonsterBehavior : MonoBehaviour {
                  Invoke("NormalColor", 0.3f);
                 if (collision.gameObject.GetComponent<CharacterBehavior>().player_life <= 0)
                 {
-                    Debug.Log("Killed");
+                    collision.gameObject.GetComponent<Animator>().SetBool("isDeath", true);
+                    collision.gameObject.GetComponent<CharacterBehavior>().enabled = false;
+                    GameObject.Find("FollowPlayer").SetActive(false);
+                    Destroy(this.gameObject);
+                    lose_prefab.gameObject.SetActive(true);
                 }
             }
         }

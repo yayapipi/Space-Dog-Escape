@@ -14,6 +14,6 @@ public class Lifebar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        pb.BarValue = (GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBehavior>().player_life *100) /200;
+        pb.BarValue = (GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBehavior>().player_life );
 	}
 }
