@@ -9,6 +9,10 @@ public class LevelGenerate : MonoBehaviour {
     public int score = 0;
     private int level_speed = 0;
     public Text scoretxt;
+
+   // public AudioClip breakwall;
+    public AudioSource breakwallsource;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -23,6 +27,8 @@ public class LevelGenerate : MonoBehaviour {
     {
         if (collision.gameObject.tag == "RedTrigger")
         {
+         //   breakwallsource.clip = breakwall;
+            breakwallsource.Play();
             GameObject.FindGameObjectWithTag("Monster").GetComponent<SpriteRenderer>().color = Color.red;
             collision.transform.parent.gameObject.GetComponent<Animator>().SetBool("isDestroy", true);
             Destroy(collision.transform.parent.gameObject, 0.3f);
@@ -39,4 +45,7 @@ public class LevelGenerate : MonoBehaviour {
         Instantiate(level[Random.Range(0,level.Length)], spawnPoint.transform.position, spawnPoint.transform.rotation);
         GameObject.FindGameObjectWithTag("Monster").GetComponent<SpriteRenderer>().color = Color.white;
     }
+
+  
+
 }

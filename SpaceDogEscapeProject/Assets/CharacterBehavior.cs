@@ -9,6 +9,7 @@ public class CharacterBehavior : MonoBehaviour {
     //Public Variable
     public float speed = 40f;
     public float player_life = 200f;
+    public AudioClip jumpfx;
 
     //Private Variable 
     private CharacterController2D controller;
@@ -33,6 +34,8 @@ public class CharacterBehavior : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump"))
         {
+            GetComponent<AudioSource>().clip = jumpfx;
+            GetComponent<AudioSource>().Play();
             isJump = true;
             anim.SetBool("isJump", true);
         }

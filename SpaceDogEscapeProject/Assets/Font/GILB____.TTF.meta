@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: df837d0c0a62d354eaae8bcc74a5d178
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gill Sans MT
+  fontNames:
+  - Gill Sans MT
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0b0ef9e2f5d0cfc418514c931f4d5dc6, type: 3}
+  - {fileID: 12800000, guid: 1eab9749e69579d4db8816843ce828e9, type: 3}
+  - {fileID: 12800000, guid: 62fb0d691070881449a13c0e4db0c234, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
